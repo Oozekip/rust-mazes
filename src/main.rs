@@ -1,7 +1,7 @@
 extern crate mazes;
 
-use mazes::maze::Maze;
-use mazes::maze::MazeType;
+use mazes::Maze;
+use mazes::MazeType;
 //use mazes::maze::Direction
 
 fn main()
