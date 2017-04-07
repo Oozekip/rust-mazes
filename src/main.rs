@@ -6,7 +6,7 @@ use mazes::MazeType;
 
 fn main()
 {
-  let m = Maze::generate_maze(32, 32, MazeType::RecusiveBacktracker);
+    let m = Maze::generate_maze(32, 32, MazeType::RecusiveBacktracker);
 
-  println!("{}", &m);
+    println!("{}", &m);
 }
