@@ -3,10 +3,6 @@ name = "mazes"
 version = "0.1.0"
 authors = ["Philip <oozekip@gmail.com>"]
 
-[[bin]]
-doc = false
-name = "main"
-
 [dependencies]
 libc = "0.2.0"
 rand = "0.3.0"
