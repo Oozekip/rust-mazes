@@ -2,7 +2,10 @@ extern crate rand;
 
 use std::fmt;
 
+/// Describes grid trait and gives a basic implementation in 'BasicGrid'
 pub mod grid;
+
+/// Provides utilities for generating mazes from existing grids
 pub mod generator;
 
 #[cfg(test)]
