@@ -12,7 +12,7 @@ pub mod generator;
 mod tests;
 
 /// The 'Direction' type. Used to describe a direction to move in
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 pub enum Direction
 {
     /// Move up
