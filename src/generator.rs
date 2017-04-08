@@ -13,7 +13,7 @@ pub enum MazeType
     RecusiveBacktracker,
 }
 
-/// Contains functions for generating mazes
+/// Generates a maze from an existing grid using the provided generator
 pub fn generate_maze<T: Grid>(grid: &mut T, maze_type: MazeType)
 {
     let (width, height) = grid.get_dimensions();

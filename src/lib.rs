@@ -28,7 +28,7 @@ pub enum Direction
 }
 
 /// The 'Tile' type. Used to describe the state of a grid position
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 pub enum Tile
 {
     // An empty grid tile with no connections
