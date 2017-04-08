@@ -1,7 +1,15 @@
 [package]
 name = "mazes"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Philip <oozekip@gmail.com>"]
+
+[lib]
+name = "mazes"
+path = "src/lib.rs"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
 
 [dependencies]
 libc = "0.2.0"

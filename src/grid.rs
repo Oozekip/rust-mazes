@@ -173,15 +173,15 @@ impl BasicGrid
         };
 
 
-        for i in 0..width
+        for j in 0..height
         {
             // Create new rows
             maze_temp.tiles.push(vec![]);
 
             // Push new tiles to the row
-            for _ in 0..height
+            for _ in 0..width
             {
-                maze_temp.tiles[i].push(Tile::new());
+                maze_temp.tiles[j].push(Tile::new());
             }
         }
 
