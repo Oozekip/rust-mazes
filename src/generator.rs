@@ -28,28 +28,27 @@ pub fn generate_maze<T: Grid>(grid: &mut T, maze_type: MazeType)
             let start_y = rand::thread_rng().gen_range(0, height);
             // Select random starting square
 
-            recurse(grid, (start_x, start_y));
+            recursive_backtracker(grid, (start_x, start_y));
         }
     }
 }
 
-fn recurse<T: Grid>(grid: &mut T, (x, y): (usize, usize))
+fn recursive_backtracker<T: Grid>(grid: &mut T, (x, y): (usize, usize))
 {
-    loop
+    let mut stack = vec![(x, y)];
+
+    while !stack.is_empty() 
     {
-        let dir = get_direction(grid, x, y);
+        let tile = stack[stack.len() - 1];
+        let dir = get_direction(grid, tile.0, tile.1);
 
-        match dir
+        if let Direction::Stay = dir
         {
-            Direction::Stay => break,
-            _ =>
-            {
-                let tile = grid.carve_path((x, y), dir)
-                    .expect("Failed to carve a generate maze");
-
-                recurse(grid, tile);
-            }
+            stack.pop();
+            continue;
         }
+
+        stack.push(grid.carve_path(tile, dir).expect("Failed to carve path"));
     }
 }
 

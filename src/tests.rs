@@ -16,11 +16,11 @@ fn gen_empty_maze()
 }
 
 // Generates a huge maze (Failing, stack overflow)
-// #[test]
-// fn gen_huge_maze()
-// {
-//     test_gen(512, 512);
-// }
+#[test]
+fn gen_huge_maze()
+{
+    test_gen(512, 512);
+}
 
 /// Generates a very small maze
 #[test]
