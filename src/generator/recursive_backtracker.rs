@@ -2,58 +2,46 @@ extern crate rand;
 
 use rand::Rng;
 
-use super::grid::Grid;
+use super::Point;
 use super::Direction;
+use super::MazeGenerator;
+use super::super::grid::Grid;
 
-/// Types of generators to use for mazes
-pub enum MazeType
+pub struct RecursiveBacktracker;
+
+impl MazeGenerator for RecursiveBacktracker
 {
-    /// Generate using recursive backtracking. Creates long, winding paths with
-    /// few dead ends
-    RecusiveBacktracker,
-}
-
-/// Generates a maze from an existing grid using the provided generator
-pub fn generate_maze<T: Grid>(grid: &mut T, maze_type: MazeType)
-{
-    let (width, height) = grid.get_dimensions();
-
-    if width == 0 || height == 0 { return; }  // Can't generate on an emtpy grid
-
-    match maze_type
+    fn generate<T: Grid>(grid: &mut T)
     {
-        MazeType::RecusiveBacktracker =>
-        {
-            let start_x = rand::thread_rng().gen_range(0, width);
-            let start_y = rand::thread_rng().gen_range(0, height);
-            // Select random starting square
+        let (width, height) = grid.get_dimensions();
 
-            recursive_backtracker(grid, (start_x, start_y));
+        if width == 0 || height == 0
+        {
+            return;
+        }
+
+        let x = rand::thread_rng().gen_range(0, width);
+        let y = rand::thread_rng().gen_range(0, height);
+
+        let mut stack = vec![(x, y)];
+
+        while !stack.is_empty()
+        {
+            let tile = stack[stack.len() - 1];
+            let dir = get_direction(grid, (tile.0, tile.1));
+
+            if let Direction::Stay = dir
+            {
+                stack.pop();
+                continue;
+            }
+
+            stack.push(grid.carve_path(tile, dir).expect("Failed to carve path"));
         }
     }
 }
 
-fn recursive_backtracker<T: Grid>(grid: &mut T, (x, y): (usize, usize))
-{
-    let mut stack = vec![(x, y)];
-
-    while !stack.is_empty() 
-    {
-        let tile = stack[stack.len() - 1];
-        let dir = get_direction(grid, tile.0, tile.1);
-
-        if let Direction::Stay = dir
-        {
-            stack.pop();
-            continue;
-        }
-
-        stack.push(grid.carve_path(tile, dir).expect("Failed to carve path"));
-    }
-}
-
-
-fn get_direction<T: Grid>(grid: &T, x: usize, y: usize) -> Direction
+fn get_direction<T: Grid>(grid: &T, (x, y): Point) -> Direction
 {
     let mut available = [Direction::Stay; 4];
     let mut count = 0;

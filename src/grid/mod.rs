@@ -3,19 +3,20 @@ use std::fmt;
 
 use super::Tile;
 use super::Direction;
+use super::Point;
 
 /// Defines the 2D square Grid trait for using the maze generator
 pub trait Grid
 {
     /// Gets tile data at a given position on a grid
-    fn get_tile_data(&self, (usize, usize)) -> Result<Tile, &'static str>;
+    fn get_tile_data(&self, Point) -> Result<Tile, &'static str>;
 
     /// Gets the width and height respectively of the grid
-    fn get_dimensions(&self) -> (usize, usize);
+    fn get_dimensions(&self) -> Point;
 
     /// Carves a path starting at the given point and moving in the
     /// given direction, if possible
-    fn carve_path(&mut self, (usize, usize), Direction) -> Result<(usize, usize), &'static str>;
+    fn carve_path(&mut self, Point, Direction) -> Result<Point, &'static str>;
 }
 
 /// Basic grid class used for examples
@@ -48,7 +49,7 @@ impl fmt::Display for BasicGrid
 
 impl Grid for BasicGrid
 {
-    fn get_tile_data(&self, (x, y): (usize, usize)) -> Result<Tile, &'static str>
+    fn get_tile_data(&self, (x, y): Point) -> Result<Tile, &'static str>
     {
         let (width, height) = self.get_dimensions();
 
@@ -62,21 +63,18 @@ impl Grid for BasicGrid
         }
     }
 
-    fn get_dimensions(&self) -> (usize, usize)
+    fn get_dimensions(&self) -> Point
     {
         (self.width, self.height)
     }
 
-    fn carve_path(&mut self,
-                  (x, y): (usize, usize),
-                  dir: Direction)
-                  -> Result<(usize, usize), &'static str>
+    fn carve_path(&mut self, (x, y): Point, dir: Direction) -> Result<Point, &'static str>
     {
         let (width, height) = self.get_dimensions();
         let tiles = &mut self.tiles;
 
         // Determine directon to carve into
-        let (x_c, y_c): (usize, usize) = match dir
+        let (x_c, y_c): Point = match dir
         {
             Direction::Up => (x, y + 1),
             Direction::Right => (x + 1, y),
@@ -156,7 +154,7 @@ impl Grid for BasicGrid
         }
         else
         {
-            Result::Err("Cannot carave in desired dirrection")
+            Result::Err("Cannot carve in desired dirrection")
         }
     }
 }

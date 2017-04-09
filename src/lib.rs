@@ -27,6 +27,8 @@ pub enum Direction
     Stay,
 }
 
+type Point = (usize, usize);
+
 /// The 'Tile' type. Used to describe the state of a grid position
 #[derive(Copy, Clone, PartialEq)]
 pub enum Tile
