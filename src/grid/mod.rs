@@ -93,7 +93,7 @@ impl Grid for BasicGrid
         }
 
         {
-            let mut from_tile = &mut tiles[y][x];
+            let from_tile = &mut tiles[y][x];
 
             // Set full tile as connected
 
@@ -124,7 +124,7 @@ impl Grid for BasicGrid
         // start != end and in bounds
         if y_c < height && x_c < width
         {
-            let mut to_tile = &mut tiles[y_c][x_c];
+            let to_tile = &mut tiles[y_c][x_c];
 
             match *to_tile
             {

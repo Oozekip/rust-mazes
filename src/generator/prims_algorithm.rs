@@ -59,7 +59,7 @@ impl Prim
         let (width, height) = grid.get_dimensions();
 
         let filled = &self.filled;
-        let mut frontier = &mut self.frontier;
+        let frontier = &mut self.frontier;
 
         // Check left
         if x > 0
