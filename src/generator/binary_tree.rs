@@ -37,7 +37,7 @@ impl MazeGenerator for BinaryTree
 
                 if dirs.len() > 0
                 {
-                    let picked = rand::thread_rng().gen_range(0, dirs.len());
+                    let picked = rand::thread_rng().gen_range(0..dirs.len());
                     grid.carve_path((i, j), dirs[picked])
                         .expect("Failed to carve a path");
                     dirs.clear();

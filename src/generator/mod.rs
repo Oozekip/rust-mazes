@@ -12,5 +12,5 @@ pub use self::binary_tree::BinaryTree;
 
 pub trait MazeGenerator
 {
-    fn generate<T: Grid>(&mut T);
+    fn generate<T: Grid>(grid: &mut T);
 }

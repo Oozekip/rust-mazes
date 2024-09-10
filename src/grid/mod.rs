@@ -9,14 +9,14 @@ use super::Point;
 pub trait Grid
 {
     /// Gets tile data at a given position on a grid
-    fn get_tile_data(&self, Point) -> Result<Tile, &'static str>;
+    fn get_tile_data(&self, point: Point) -> Result<Tile, &'static str>;
 
     /// Gets the width and height respectively of the grid
     fn get_dimensions(&self) -> Point;
 
     /// Carves a path starting at the given point and moving in the
     /// given direction, if possible
-    fn carve_path(&mut self, Point, Direction) -> Result<Point, &'static str>;
+    fn carve_path(&mut self, point: Point, direction: Direction) -> Result<Point, &'static str>;
 }
 
 /// Basic grid class used for examples

@@ -20,8 +20,8 @@ impl MazeGenerator for RecursiveBacktracker
             return;
         }
 
-        let x = rand::thread_rng().gen_range(0, width);
-        let y = rand::thread_rng().gen_range(0, height);
+        let x = rand::thread_rng().gen_range(0..width);
+        let y = rand::thread_rng().gen_range(0..height);
 
         let mut stack = vec![(x, y)];
 
@@ -91,7 +91,7 @@ fn get_direction<T: Grid>(grid: &T, (x, y): Point) -> Direction
     if count > 0
     {
         // Generate a number between 0 and count
-        let ind = rand::thread_rng().gen_range(0, count);
+        let ind = rand::thread_rng().gen_range(0..count);
         available[ind]
     }
     else

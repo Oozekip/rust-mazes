@@ -28,8 +28,8 @@ impl MazeGenerator for Prim
 
         let mut state = Prim::new();
 
-        let x = rand::thread_rng().gen_range(0, width);
-        let y = rand::thread_rng().gen_range(0, height);
+        let x = rand::thread_rng().gen_range(0..width);
+        let y = rand::thread_rng().gen_range(0..height);
 
         state.filled.insert((x, y));
 
@@ -114,7 +114,7 @@ impl Prim
         let max_val = self.frontier.len();
 
         // get random index for value
-        let index = rand::thread_rng().gen_range(0, max_val);
+        let index = rand::thread_rng().gen_range(0..max_val);
         let mut point = Option::None;
 
         for (i, v) in self.frontier.iter().enumerate()
@@ -167,7 +167,7 @@ impl Prim
         if dirs.len() > 0
         {
             // Pick random direction
-            let index = rand::thread_rng().gen_range(0, dirs.len());
+            let index = rand::thread_rng().gen_range(0..dirs.len());
 
             grid.carve_path((x, y), dirs[index])
                 .expect("Failed to carve path");
